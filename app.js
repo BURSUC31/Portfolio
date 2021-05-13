@@ -12,4 +12,4 @@ app.get("/:id", (req, res) => {
   res.render("show", { id });
 });
 
-app.listen(3000, () => console.log("connection open on port 3000"));
+app.listen(3000, () => console.log("connection open on port 3000 "));
