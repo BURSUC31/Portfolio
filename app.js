@@ -42,7 +42,7 @@ app.get("/new", async (req, res) => {
 });
 app.get("/:id", async (req, res) => {
   const { id } = req.params;
-  const product = await Product.findById(id);
+  const product = await Product.findById({ _id: id });
 
   res.render("./products/show", { product });
 });
