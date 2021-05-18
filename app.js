@@ -7,10 +7,13 @@ const methodOverride = require("method-override");
 const product = require("./models/product");
 const app = express();
 
-mongoose.connect("mongodb://localhost:27017/project1", {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
+mongoose.connect(
+  "mongodb+srv://mojfrt:gojineata1@cluster0.7ssn1.mongodb.net/blabla",
+  {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  }
+);
 const db = mongoose.connection;
 db.on("error", console.error.bind(console, "connection error:"));
 db.once("open", () => {
