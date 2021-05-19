@@ -4,6 +4,10 @@
     <h5 class="card-title"><%= product.name %></h5>
     <p class="card-text"><%= product.description %></p>
     <p class="card-text">$<%= product.price%></p>
+    <a href="/<%=product._id  %>/edit" class="card-link">eddit product</a>
+    <form action="/<%=product._id%>?_method=DELETE" method="POST">
+      <button class="btn btn-sm btn-danger">Delete</button>
+    </form>
     <a href="/" class="card-link">back to products</a>
   </div>
 </div>
