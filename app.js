@@ -8,7 +8,7 @@ const methodOverride = require("method-override");
 const app = express();
 const connectionProduction =
   "mongodb+srv://mojfrt:gojineata1@cluster0.7ssn1.mongodb.net/blabla";
-mongoose.connect("mongodb://localhost:27017/tester" || connectionProduction, {
+mongoose.connect(connectionProduction || "mongodb://localhost:27017/tester", {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
