@@ -6,9 +6,12 @@ const Product = require("./models/product");
 const methodOverride = require("method-override");
 
 const app = express();
-const connectionProduction =
-  "mongodb+srv://mojfrt:gojineata1@cluster0.7ssn1.mongodb.net/blabla";
-mongoose.connect(connectionProduction || "mongodb://localhost:27017/tester", {
+if (process.env.NODE_ENV === "production") {
+  require("dotenv").config();
+}
+const DATAbURL = process.env.DATABASEURL;
+
+mongoose.connect(DATAbURL || "mongodb://localhost:27017/tester", {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
