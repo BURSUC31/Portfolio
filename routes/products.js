@@ -42,12 +42,12 @@ router.get(
     res.render("./products/edit", { product });
   })
 );
-app.delete(
+router.delete(
   "/:id",
   catchAsync(async (req, res) => {
     const { id } = req.params;
     await Product.findByIdAndDelete(id);
-    res.redirect("/");
+    res.redirect("./");
   })
 );
 module.exports = router;
