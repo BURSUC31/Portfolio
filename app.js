@@ -4,8 +4,9 @@ const ejsMate = require("ejs-mate");
 const mongoose = require("mongoose");
 const Product = require("./models/product");
 const methodOverride = require("method-override");
-
+const ExpressError = require("./utils/ExpressError");
 const app = express();
+const productRoutes = require("./routes/products");
 if (process.env.NODE_ENV === "production") {
   require("dotenv").config();
 }
@@ -27,43 +28,13 @@ app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 app.engine("ejs", ejsMate);
 
-app.get("/", async (req, res) => {
-  const products = await Product.find({});
-  res.render("./products/home", { products });
+app.use("/", productRoutes);
+app.all("*", (req, res, next) => {
+  next(new ExpressError("Page Not Found", 404));
 });
-app.post("/", async (req, res) => {
-  const product = new Product(req.body.product);
-  await product.save();
-  res.redirect("/");
+app.use((err, req, res, next) => {
+  const { statusCode = 500 } = err;
+  if (!err.message) err.message = "Oh no, something went wrong";
+  res.status(statusCode).render("error", { err });
 });
-
-app.get("/new", async (req, res) => {
-  res.render("./products/new");
-});
-app.get("/about", (req, res) => {
-  res.render("./products/about");
-});
-app.get("/:id", async (req, res) => {
-  const { id } = req.params;
-  const product = await Product.findById(id);
-
-  res.render("./products/show", { product });
-});
-app.get("/:id/edit", async (req, res) => {
-  const { id } = req.params;
-  const product = await Product.findById(id);
-
-  res.render("./products/edit", { product });
-});
-app.put("/:id", async (req, res) => {
-  const { id } = req.params;
-  const product = await Product.findByIdAndUpdate(id, { ...req.body.product });
-  res.redirect(`/${product._id}`);
-});
-app.delete("/:id", async (req, res) => {
-  const { id } = req.params;
-  await Product.findByIdAndDelete(id);
-  res.redirect("/");
-});
-
 app.listen(3000, () => console.log("connection open on port 3000 "));
