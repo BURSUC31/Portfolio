@@ -47,6 +47,7 @@ app.delete(
   catchAsync(async (req, res) => {
     const { id } = req.params;
     await Product.findByIdAndDelete(id);
+    res.redirect("/");
   })
 );
 module.exports = router;
