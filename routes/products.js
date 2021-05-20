@@ -42,4 +42,11 @@ router.get(
     res.render("./products/edit", { product });
   })
 );
+app.delete(
+  "/:id",
+  catchAsync(async (req, res) => {
+    const { id } = req.params;
+    await Product.findByIdAndDelete(id);
+  })
+);
 module.exports = router;
