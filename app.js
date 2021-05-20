@@ -9,7 +9,7 @@ const app = express();
 if (process.env.NODE_ENV === "production") {
   require("dotenv").config();
 }
-const DATAbURL = process.env.DATABASEURL;
+var DATAbURL = process.env.DATABASEURL;
 
 mongoose.connect(DATAbURL || "mongodb://localhost:27017/tester", {
   useNewUrlParser: true,
