@@ -12,7 +12,7 @@ if (process.env.NODE_ENV === "production") {
 }
 var DATAbURL = process.env.DATABASEURL;
 
-mongoose.connect(DATAbURL || "mongodb://localhost:27017/tester", {
+mongoose.connect("mongodb+srv://mojfrt:gojineata1@cluster0.7ssn1.mongodb.net/blabla", {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
