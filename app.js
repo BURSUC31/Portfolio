@@ -7,15 +7,19 @@ const methodOverride = require("method-override");
 const ExpressError = require("./utils/ExpressError");
 const app = express();
 const productRoutes = require("./routes/products");
+const profileRoutes = require("./routes/profile");
 if (process.env.NODE_ENV === "production") {
   require("dotenv").config();
 }
 var DATAbURL = process.env.DATABASEURL;
 
-mongoose.connect("mongodb+srv://mojfrt:gojineata1@cluster0.7ssn1.mongodb.net/blabla", {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
+mongoose.connect(
+  "mongodb+srv://mojfrt:gojineata1@cluster0.7ssn1.mongodb.net/blabla",
+  {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  }
+);
 const db = mongoose.connection;
 db.on("error", console.error.bind(console, "connection error:"));
 db.once("open", () => {
@@ -27,8 +31,10 @@ app.use(methodOverride("_method"));
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 app.engine("ejs", ejsMate);
+app.use(express.static("public"));
 
-app.use("/", productRoutes);
+app.use("/Crud/", productRoutes);
+app.use("/", profileRoutes);
 app.all("*", (req, res, next) => {
   next(new ExpressError("Page Not Found", 404));
 });
