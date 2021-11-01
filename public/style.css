@@ -18,6 +18,8 @@ header nav ul a {
   transition: color 0.3s ease-in;
   font-size: 1.4em;
   font-weight: 800;
+  margin: 0;
+  padding: 2px;
 }
 
 header nav ul a:hover {

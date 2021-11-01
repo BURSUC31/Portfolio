@@ -14,7 +14,7 @@ if (process.env.NODE_ENV === "production") {
 var DATAbURL = process.env.DATABASEURL;
 
 mongoose.connect(
-  "mongodb+srv://mojfrt:gojineata1@cluster0.7ssn1.mongodb.net/blabla",
+  "mongodb://localhost:27017/yelp-camp?readPreference=primary&appname=MongoDB%20Compass&directConnection=true&ssl=false",
   {
     useNewUrlParser: true,
     useUnifiedTopology: true,
